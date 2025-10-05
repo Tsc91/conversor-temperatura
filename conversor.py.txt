@@ -10,29 +10,46 @@ def celsius_para_kelvin(c):
 def kelvin_para_celsius(k):
     return k - 273.15
 
-print("🌡️ Conversor de Temperaturas")
-print("1 - Celsius para Fahrenheit")
-print("2 - Fahrenheit para Celsius")
-print("3 - Celsius para Kelvin")
-print("4 - Kelvin para Celsius")
+def ler_float(mensagem):
+    while True:
+        entrada = input(mensagem)
+        try:
+            return float(entrada)
+        except ValueError:
+            print("Entrada inválida. Digite um número, por exemplo: 23.5")
 
-opcao = input("Escolha uma opção: ")
+def menu():
+    print("\n🌡️ Conversor de Temperaturas")
+    print("1 - Celsius para Fahrenheit")
+    print("2 - Fahrenheit para Celsius")
+    print("3 - Celsius para Kelvin")
+    print("4 - Kelvin para Celsius")
+    print("0 - Sair")
+    return input("Escolha uma opção: ")
 
-if opcao == "1":
-    c = float(input("Digite a temperatura em Celsius: "))
-    print(f"{c}°C = {celsius_para_fahrenheit(c):.2f}°F")
+def main():
+    while True:
+        opcao = menu()
+        if opcao == "0":
+            print("Saindo... até mais!")
+            break
+        elif opcao == "1":
+            c = ler_float("Digite a temperatura em Celsius: ")
+            print(f"{c}°C = {celsius_para_fahrenheit(c):.2f}°F")
+        elif opcao == "2":
+            f = ler_float("Digite a temperatura em Fahrenheit: ")
+            print(f"{f}°F = {fahrenheit_para_celsius(f):.2f}°C")
+        elif opcao == "3":
+            c = ler_float("Digite a temperatura em Celsius: ")
+            print(f"{c}°C = {celsius_para_kelvin(c):.2f}K")
+        elif opcao == "4":
+            k = ler_float("Digite a temperatura em Kelvin: ")
+            if k < 0:
+                print("Kelvin não pode ser negativo. Tente novamente.")
+            else:
+                print(f"{k}K = {kelvin_para_celsius(k):.2f}°C")
+        else:
+            print("Opção inválida. Escolha 0, 1, 2, 3 ou 4.")
 
-elif opcao == "2":
-    f = float(input("Digite a temperatura em Fahrenheit: "))
-    print(f"{f}°F = {fahrenheit_para_celsius(f):.2f}°C")
-
-elif opcao == "3":
-    c = float(input("Digite a temperatura em Celsius: "))
-    print(f"{c}°C = {celsius_para_kelvin(c):.2f}K")
-
-elif opcao == "4":
-    k = float(input("Digite a temperatura em Kelvin: "))
-    print(f"{k}K = {kelvin_para_celsius(k):.2f}°C")
-
-else:
-    print("Opção inválida!")
+if __name__ == "__main__":
+    main()
